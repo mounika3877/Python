@@ -1,0 +1,43 @@
+import requests
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+# Step 1: Fetch data from CoinGecko API (we'll get the prices for Bitcoin and Ethereum)
+url = "https://api.coingecko.com/api/v3/coins/markets"
+params = {
+    'vs_currency': 'usd',  # Currency to show prices in USD
+    'ids': 'bitcoin,ethereum',  # Get Bitcoin and Ethereum data
+    'order': 'market_cap_desc',  # Order by market cap
+}
+response = requests.get(url, params=params)
+# Step 2: Process the response
+if response.status_code == 200:
+    data = response.json()
+else:
+    print(f"Error fetching data: {response.status_code}")
+# Extract the relevant data: cryptocurrency names, current prices, and market caps
+coins = ['Bitcoin', 'Ethereum']
+prices = [item['current_price'] for item in data]
+market_caps = [item['market_cap'] for item in data]
+# Step 3: Prepare the data for visualization
+df = pd.DataFrame({
+    'Coin': coins,
+    'Price (USD)': prices,
+    'Market Cap (USD)': market_caps
+})
+# Step 4: Data Visualization using Matplotlib and Seaborn
+sns.set(style="whitegrid")
+# Plotting price comparison
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Coin', y='Price (USD)', data=df, palette='viridis')
+plt.title('Cryptocurrency Prices (Bitcoin vs Ethereum)')
+plt.ylabel('Price (USD)')
+plt.xlabel('Cryptocurrency')
+plt.show()
+# Plotting market cap comparison
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Coin', y='Market Cap (USD)', data=df, palette='Blues')
+plt.title('Cryptocurrency Market Cap (Bitcoin vs Ethereum)')
+plt.ylabel('Market Cap (USD)')
+plt.xlabel('Cryptocurrency')
+plt.show()
