@@ -13,6 +13,10 @@ DATE OF DURATION : DECEMBER 30TH 2024 TO JANUARY 30TH 2025
 
 MENTOR NAME : NEELA SANTOSH
 
+# output:
+![Image](https://github.com/user-attachments/assets/7dea54a7-5e19-4a01-aebc-53ec53b37a43)
+
+
 Project Overview: Weather Data Fetching and Visualization This project involves fetching weather data for a specific city from the OpenWeatherMap API, processing it, and visualizing it using Plotly. The goal is to retrieve a 5-day weather forecast, extract important details such as temperature, humidity, and pressure, and then present the data in both tabular form and as an interactive graph.
 
 Key Objectives:
